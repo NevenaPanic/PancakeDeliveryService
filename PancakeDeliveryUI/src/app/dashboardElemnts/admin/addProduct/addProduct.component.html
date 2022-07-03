@@ -1,0 +1,43 @@
+<div class="form-control add">
+    <h3 style="text-align: center;"> Add product </h3>
+    <hr>
+    <div>
+        <form [formGroup]="addForm" (ngSubmit)="addProduct()">
+            <table>
+                <tr>
+                    <td> Name: </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" name="name" formControlName="name"  class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td> Ingredients: 
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" name="ingredients" formControlName="ingredients"  class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label> Price [€]: </label></td>
+                    <td><input type="number" name="price" formControlName="price"  class="form-control" style="width: 100%;"/></td>
+                </tr>
+                <!-- Upload image goes here-->
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                        <app-uploadPicture (onUploadFinished)="uploadFinished($event)"></app-uploadPicture>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="col text-center">
+                        <input type="submit" value="Add" class="btn btn-dark form-control">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

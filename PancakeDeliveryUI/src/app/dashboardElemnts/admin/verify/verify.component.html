@@ -1,0 +1,20 @@
+<h1 style="text-align: center;"> All users: </h1>
+
+<div class="container" id="userContainer">
+    <div class="row">
+        <div class="col-sm"> Image: </div>
+        <div class="col-sm"> ID: </div>
+        <div class="col"> Full name: </div>
+        <div class="col"> Username: </div>
+        <div class="col"> Email: </div>
+        <div class="col"> User type: </div>
+        <div class="col"> Date of Birth: </div>
+        <div class="col"> Address: </div>
+        <div class="col-sm"> Verified: </div>
+        <div class="col" style="width: 150px;"> Actions </div>
+        
+    </div>
+    <div *ngFor="let user of allUsers" class="container">
+            <app-userVerify [user]="user" ></app-userVerify>
+    </div>
+</div>

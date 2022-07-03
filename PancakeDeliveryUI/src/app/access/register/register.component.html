@@ -1,0 +1,68 @@
+<div class="form-control register">
+    <h3 class="text-center">Register Form</h3>
+    <div>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <table>
+                <tr> Username:</tr>
+                <tr><input type="text" name="username" formControlName="username"  class="form-control"></tr>
+                <tr> Email:</tr>
+                <tr><input type="email" name="email" formControlName="email"  class="form-control"></tr>
+                <tr>
+                    <td> Password: </td>
+                    <td> Repeat password: </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="password" name="password" formControlName="password" class="form-control">
+                    </td>
+                    <td>
+                        <input type="password" name="repaetPassword" formControlName="repeatPassword" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td> Name: </td>
+                    <td> Surname: </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="name" formControlName="name" class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" name="surname" formControlName="surname" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label> Date of birth: </label></td>
+                    <td><input type="date" name="dateOfBirth" formControlName="dateOfBirth" class="form-control"></td>
+                </tr>
+                <tr> Address:</tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" name="address" formControlName="address" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label> Choose user type: </label></td>
+                    <td>
+                        <select name="userType" class="form-control" formControlName="userType">
+                            <option name="customer" value="customer" selected> CUSTOMER </option>
+                            <option name="deliverer" value="deliverer"> DELIVERER </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><br></tr>
+                <!-- Upload image goes here-->
+                <tr>
+                    <td colspan="2">
+                        <app-uploadPicture (onUploadFinished)="uploadFinished($event)"></app-uploadPicture>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="col text-center">
+                        <input type="submit" value="Register" class="btn btn-dark form-control">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

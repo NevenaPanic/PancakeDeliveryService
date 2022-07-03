@@ -1,0 +1,66 @@
+
+<h4> Welcome back {{username}}! :D </h4>
+<div class="dashboard" id="dashboard">
+    <h1 style="text-align: center; font-size:60px; margin: 10px;"> Dashboard </h1>
+    <hr>
+    <div *ngIf="userType == 'customer'">
+        <a routerLink="">
+            <div class="dashboard-element">
+                <img src="/assets/Images/add.png"/> &nbsp;
+                New / Current Order 
+            </div>    
+        </a>
+        <a routerLink="">
+            <div class="dashboard-element">
+                <img src="/assets/Images/temporary-files.png" /> &nbsp;   
+                Order History 
+            </div>
+        </a>
+    </div>
+    <div *ngIf="userType == 'deliverer'">
+        <a routerLink="">
+            <div class="dashboard-element">
+                <img src="/assets/Images/online-order.png"/> &nbsp;
+                New Orders 
+            </div>
+        </a>
+        <a routerLink="">
+            <div class="dashboard-element">
+                <img src="/assets/Images/booking.png"/> &nbsp;
+                My Orders 
+            </div>
+        </a>
+        <a routerLink="">
+            <div class="dashboard-element">
+                <img src="/assets/Images/track.png"/> &nbsp;
+                Current Order 
+            </div>
+        </a>
+    </div>
+    <div *ngIf="userType == 'admin'">
+        <a routerLink="/verify">
+            <div class="dashboard-element">
+                <img src="/assets/Images/verified.png" /> &nbsp;
+                Verify 
+            </div>
+        </a>
+        <a routerLink="/addProduct">
+            <div class="dashboard-element">
+                <img src="/assets/Images/add-dish.png"> &nbsp;
+                Add Product 
+            </div>
+        </a>
+        <a routerLink="">
+            <div class="dashboard-element">
+                <img src="/assets/Images/search.png"/> &nbsp;
+                All Orders 
+            </div>
+        </a>
+    </div>
+    <a routerLink="">
+        <div class="dashboard-element">
+            <img src="/assets/Images/user-profile.png"/> &nbsp;
+            Profile 
+        </div>
+    </a>
+</div>

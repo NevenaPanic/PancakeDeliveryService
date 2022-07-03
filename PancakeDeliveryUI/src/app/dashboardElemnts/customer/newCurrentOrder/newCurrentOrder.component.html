@@ -1,0 +1,9 @@
+<div *ngFor="let product of allProducts" class="container">
+    <div class="row" style="height: 150px; padding:15px; border: 3px solid #E9D3FF; border-radius:20px; margin: 10px;">
+        <img [src]="createImgPath(product.pictureSource)" style="width: 110px;height:120px; float: left; border: 3px solid #E9D3FF; border-radius: 5px; padding: 0px;">
+        <p style="text-align: center; width: 75%;">
+            <i>{{product.id}}</i> : <b>{{product.name}}</b> [ <b>{{product.price}} €</b> ]<br><hr>
+            {{product.ingredients}}
+        </p>
+    </div>
+</div>

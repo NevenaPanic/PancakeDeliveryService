@@ -1,0 +1,17 @@
+<div class="form-control log-in">
+    <h3>Log In Form</h3>
+    <hr>
+    <div>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <table>
+                <tr> Username:</tr>
+                <tr><input type="email" name="email" formControlName="email"  class="form-control"></tr>
+                <tr><br></tr> 
+                <tr> Password:</tr>
+                <tr><input type="password" name="password" formControlName="password" class="form-control"></tr>
+                <tr><br></tr>
+                <tr><input type="submit" value="Log In" class="btn btn-dark"></tr>
+            </table>
+        </form>
+    </div>
+</div>

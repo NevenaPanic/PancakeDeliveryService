@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">    
+        <div class="col-sm"><img  [src]="createImgPath(user.userPicture)" style="width: 50px; height:50px;"></div>
+        <div class="col-sm"> {{user.id}} </div>
+        <div class="col"> {{user.name}} {{user.lastName}} </div>
+        <div class="col"> {{user.username}} </div>
+        <div class="col"> {{user.email}} </div>
+        <div class="col"> {{user.userType}} </div>
+        <div class="col"> {{user.dateOfBirth.substring(0,10)}} </div>
+        <div class="col"> {{user.address}} </div>
+        <div class="col-sm"> {{user.verified}} </div>
+        <div *ngIf="user.userType == 'deliverer'; else placeholder" style="width: 150px; padding-top: 10px;" class="col">
+            <button class="btn btn-dark" (click)="verify()" style="padding: 0px; margin: 2px;"> Verify </button>
+            <button class="btn btn-dark" (click)="reject()" style="padding: 0px; margin: 2px;"> Reject </button>
+        </div>
+        <ng-template #placeholder>
+            <div style="width:150px"></div>
+        </ng-template>
+    </div>
+</div>

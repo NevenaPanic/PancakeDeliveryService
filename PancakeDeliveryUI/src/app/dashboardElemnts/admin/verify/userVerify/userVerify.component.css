@@ -1,0 +1,20 @@
+.row{
+    background-color: #555555;
+    border: 2px solid #E9D3FF;
+    border-radius: 10px;
+    height: 80px;
+}
+
+.col{
+    text-align: center;
+    padding-top: 25px;
+}
+
+.col-sm{
+    text-align: left;
+    padding-top: 15px;
+}
+
+button{
+    width: 100px;
+}

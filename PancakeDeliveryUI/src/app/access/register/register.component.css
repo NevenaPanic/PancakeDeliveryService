@@ -1,0 +1,17 @@
+.register{
+    width: fit-content;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: #E9D3FF;
+}
+
+label{
+    width: 99%;
+    height: 35px;
+    text-align:center;
+    padding: 3px;
+    border-style: solid;
+    border-color: #444444;
+    border-width: 2px;
+}

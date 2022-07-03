@@ -1,0 +1,15 @@
+.container{
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.row{
+    height: 40px;
+    margin: 20px;
+}
+
+.col{
+    text-align: center;
+    vertical-align: middle;
+}
