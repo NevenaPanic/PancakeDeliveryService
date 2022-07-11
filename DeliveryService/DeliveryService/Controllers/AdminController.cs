@@ -44,5 +44,11 @@ namespace DeliveryService.Controllers
         {
             return Ok(_adminService.VerifyUser(id));
         }
+
+        [HttpGet("getAllOrders")]
+        public IActionResult GetAllOrders()
+        {
+            return Ok(_adminService.GetAllOrders());
+        }
     }
 }

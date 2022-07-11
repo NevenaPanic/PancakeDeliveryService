@@ -1,0 +1,35 @@
+<table style="width: 95%; margin: auto; background-color: #555555; text-align: center; margin-top: 25px;">
+    <tr>
+        <th> Order ID: </th>
+        <th> Customer info: </th>
+        <th> Deliverer info: </th>
+        <th> Order info: </th>
+        <th> Order STATE: </th>
+    </tr>
+    <tr *ngFor="let order of allOrders">
+        <td id="orderID">{{order.orderID}}</td>
+        <td class="userInfo">
+            id[<i>{{order.customerID}}</i>] :{{order.customerUsername}}<br>
+            {{order.customerFullName}}
+        </td>
+        <td class="userInfo" *ngIf="order.delivererID === -1">
+            PENDING DELIVERY!<br>
+            Waiting for the deliverer!
+        </td>
+        <td class="userInfo" *ngIf="order.delivererID != -1">
+            id[<i>{{order.delivererID}}</i>] :{{order.delivererUsername}}<br>
+            {{order.delivererFullName}}
+        </td>
+        <td>
+            {{order.orderItems}}<br>
+            <b> Total: </b>[<i id="price"> {{order.total}} &euro; </i>]<br>
+            Address: {{order.deliveryAddress}} <br>
+            Comment: <i>" {{order.comment}} "</i>
+        </td>
+        <td id="state">
+            <b *ngIf="order.status === 'PENDING'" style="color: crimson;">{{order.status}}</b>
+            <b *ngIf="order.status === 'IN_DELIVERY'" style="color: rgb(43, 147, 238);">{{order.status}}</b>
+            <b *ngIf="order.status === 'DELIVERED'" style="color: rgb(67, 228, 64);">{{order.status}}</b>
+        </td>
+    </tr>
+</table>

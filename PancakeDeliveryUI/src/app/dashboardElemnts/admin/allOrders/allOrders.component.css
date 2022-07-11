@@ -1,0 +1,43 @@
+table{
+    width: 95%;
+    text-align: center; 
+    margin: auto;
+    margin-top: 25px;
+    border: 2px solid #E9D3FF;
+    background-color: #555555;
+    color: lightgray;
+}
+
+th{
+    height: 35px;
+    padding: 5px;
+    color: #E9D3FF;
+}
+
+td{
+    padding: 10px;
+    border-right: 0.5px solid #E9D3FF;
+}
+
+tr{
+    border-bottom: 1px solid #E9D3FF;
+}
+
+#orderID{
+    width: 6%;
+}
+
+#state{
+    width: 10%;
+}
+
+#price{
+    color: crimson;
+}
+
+.userInfo{
+    width: 10%;
+}
+
+tr:nth-child(even) {background: #414141}
+tr:nth-child(odd) {background: #313131}

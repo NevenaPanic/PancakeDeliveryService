@@ -40,6 +40,45 @@ namespace DeliveryService.Services
             }
         }
 
+        // order history
+        public List<DisplayOrderDto> GetAllOrders()
+        {
+            List<DisplayOrderDto> allOrders = new List<DisplayOrderDto>();
+
+            foreach (Order order in _dbContext.Orders.ToList())
+            {
+                DisplayOrderDto orderDto = _mapper.Map<DisplayOrderDto>(order);
+                User customer = _dbContext.Users.Find(order.CustomerID);
+                orderDto.CustomerFullName = String.Format("{0} {1}", customer.Name, customer.LastName);
+                orderDto.CustomerUsername = customer.Username;
+
+                User deliverer = _dbContext.Users.Find(order.DelivererID);
+                if (deliverer != null)
+                {
+                    orderDto.DelivererFullName = String.Format("{0} {1}", customer.Name, customer.LastName);
+                    orderDto.DelivererUsername = customer.Username;
+                }
+                else 
+                {
+                    orderDto.DelivererFullName = "";
+                    orderDto.DelivererUsername = "";
+                }
+
+                // get all product IDs
+                var orderedProducts = _dbContext.OrderedProducts.Where(x => x.OrderID == order.OrderID).Select(x => new { x.ProductID, x.Quantity }).ToList();
+                List<Product> products = _dbContext.Products.ToList();
+                // than get all products by IDs
+                foreach (var item in orderedProducts)
+                {
+                    Product product = _dbContext.Products.Find(item.ProductID);
+                    orderDto.OrderItems += String.Format("{0} [{1} €] x {2} = {3}€" + Environment.NewLine, product.Name, product.Price, item.Quantity, item.Quantity * product.Price);
+                }
+                allOrders.Add(orderDto);
+            }
+
+            return allOrders;
+        }
+
         public List<UserDisplayDto> GetAllUsers()
         {
             List<User> allUsers = _dbContext.Users.ToList();
@@ -64,7 +103,7 @@ namespace DeliveryService.Services
                 string message = "Hello, \n" +
                                  "You've been rejected for the deliverer position in Pancake Delivery Service!";
 
-                SendEmail(rejectedDeliverer.Email, message);
+                // SendEmail(rejectedDeliverer.Email, message);
 
                 return true;
             }
@@ -84,7 +123,7 @@ namespace DeliveryService.Services
                 string message = "Hello, \n" +
                                  "We are happy to welcom you as the new employee at Pancake Delivery Service! :D";
 
-                SendEmail(verifiedDeliverer.Email, message);
+                // SendEmail(verifiedDeliverer.Email, message);
 
                 return true;
             }

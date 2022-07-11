@@ -17,7 +17,7 @@ namespace DeliveryService.Models
         public string Address { get; set; }
         public string UserType { get; set; }        // ADMIN, CUSTOMER, DELIVERER
         public string UserPicture { get; set; }     // path leading to picture source
-        public bool Verified { get; set; } = true;
+        public bool? Verified { get; set; }
 
         public User() { }
     }

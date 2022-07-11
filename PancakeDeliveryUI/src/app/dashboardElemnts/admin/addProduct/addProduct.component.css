@@ -14,6 +14,10 @@ td{
     width: 150px;
 }
 
+textarea{
+    height: 100px;
+}
+
 label{
     width: 93%;
     height: 35px;

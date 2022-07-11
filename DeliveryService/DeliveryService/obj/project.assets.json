@@ -5589,11 +5589,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\neven\\OneDrive\\Desktop\\Web2_projekat\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
+      "projectUniqueName": "C:\\Users\\neven\\OneDrive\\Desktop\\PancakeDeliveryService\\PancakeDeliveryService\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
       "projectName": "DeliveryService",
-      "projectPath": "C:\\Users\\neven\\OneDrive\\Desktop\\Web2_projekat\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
+      "projectPath": "C:\\Users\\neven\\OneDrive\\Desktop\\PancakeDeliveryService\\PancakeDeliveryService\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
       "packagesPath": "C:\\Users\\neven\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\neven\\OneDrive\\Desktop\\Web2_projekat\\DeliveryService\\DeliveryService\\obj\\",
+      "outputPath": "C:\\Users\\neven\\OneDrive\\Desktop\\PancakeDeliveryService\\PancakeDeliveryService\\DeliveryService\\DeliveryService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

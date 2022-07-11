@@ -1,0 +1,35 @@
+.row{
+    height: 150px;
+    padding:15px;
+    border: 3px solid #E9D3FF;
+    border-radius: 15px;
+    margin: 10px;
+    background-color: #444444;
+}
+
+#image{
+    width: 90px;
+    height: 120px;
+    float: left;
+    border: 2px solid #E9D3FF;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+p {
+    text-align: center;
+}
+
+#price{
+    color: #e44077;
+}
+
+#amountDiv{
+    width: 15%;
+    padding-top: 15px;
+}
+
+.btn{
+    width: 175px;
+    margin-top:5px;
+}

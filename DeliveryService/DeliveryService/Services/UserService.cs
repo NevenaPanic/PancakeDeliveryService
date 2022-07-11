@@ -29,7 +29,8 @@ namespace DeliveryService.Services
             _dbContext = dbContext;
             _secretKey = config.GetSection("SecretKey");
 
-            /* da dodam admina na pocetku u novu bazu da ga ne kucam svaki put
+            // da dodam admina na pocetku u novu bazu da ga ne kucam svaki put
+            /*
             if (_dbContext.Users.Where(x => x.Email == "neska@gmail.com").FirstOrDefault() == null)
             { 
                 // adding me aka Admin
@@ -38,7 +39,7 @@ namespace DeliveryService.Services
                     Id = 0,
                     Name = "Nevena",
                     LastName = "Panić",
-                    Username = "Neška",
+                    Username = "Neska",
                     Email = "neska@gmail.com",
                     Password = BCrypt.Net.BCrypt.HashPassword("123"),
                     UserPicture = "Resources\\Images\\chick_cry.png",
@@ -48,6 +49,7 @@ namespace DeliveryService.Services
                     Verified = true
                 };
                 _dbContext.Users.Add(admin);
+                _dbContext.SaveChanges();
             }*/
         }
 
@@ -61,18 +63,70 @@ namespace DeliveryService.Services
             return _mapper.Map<List<ProductDto>>(_dbContext.Products.ToList());
         }
 
+        public int MakeOrder(MakeOrderDto makeOrderDto)
+        {
+            Order newOrder = _mapper.Map<Order>(makeOrderDto);
+
+            var productIds = _dbContext.Products.Select(x => x.Id).ToList();    // get all product Id to check if ordered products are valid
+            foreach (var orderedProduct in newOrder.OrderedProducts)
+            {
+                if (!productIds.Contains(orderedProduct.ProductID))
+                {
+                    return -1;
+                }
+            }
+
+            var customer = _dbContext.Users.ToList().Where(x => x.Id == newOrder.CustomerID).FirstOrDefault();
+
+            if (customer == null)
+            {
+                return -2;      // customer not in db
+            }
+            else if (String.IsNullOrEmpty(newOrder.DeliveryAddress))
+            {
+                return -3;      // no address
+            }
+            else if (newOrder.OrderedProducts.Count == 0)
+            {
+                return -4;      // no ordered products
+            }
+            else if (newOrder.Total < 9.5)      // delivery fee + min price item x 1 = 9.5
+            {
+                return -5;
+            }
+            else
+            {
+                newOrder.OrderID = 0;
+                newOrder.Time = DateTime.Now;
+                newOrder.Status = "PENDING";
+                newOrder.DelivererID = -1;
+                _dbContext.Add(newOrder);   // add to db
+                _dbContext.SaveChanges();   // save
+
+                newOrder = _dbContext.Orders.ToList().Last();   // read it from db to get orderID
+
+                foreach (var product in newOrder.OrderedProducts)
+                {
+                    product.OrderID = newOrder.OrderID;
+                    product.Order = newOrder;
+                    product.Product = _dbContext.Products.ToList().Find(x => x.Id == product.ProductID);
+                }
+
+                _dbContext.Update(newOrder);    // update
+                _dbContext.SaveChanges();       // save again
+
+                return 0;       // all ok
+            }
+        }
+
+        // ======================================= Access Control =========================================================================
         public int Register(UserRegisterDto registerDto)
         {
             User newUser = _mapper.Map<User>(registerDto);
 
-            switch (newUser.UserType)
+            if (newUser.UserType != "deliverer") 
             {
-                case "deliverer":
-                    newUser.Verified = false;
-                    break;
-                default:
-                    newUser.Verified = true;
-                    break;
+                newUser.Verified = true;
             }
 
             var allUsers = _dbContext.Users.ToList().Where( x => x.Email == newUser.Email);
@@ -101,31 +155,32 @@ namespace DeliveryService.Services
             if (user == null)
                 return new TokenDto() { Token = "-1"};      // unknown user email - error
 
-            if (BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))     // commpare hashed passwords
+            // commpare hashed passwords
+            if (BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
             {
                 List<Claim> claims = new List<Claim>();
-                //Mozemo dodati Claimove u token, oni ce biti vidljivi u tokenu i mozemo ih koristiti za autorizaciju
+                // token claims
                 claims.Add(new Claim("id", user.Id.ToString()));
                 claims.Add(new Claim("email", user.Email));
                 claims.Add(new Claim("username", user.Username));
                 claims.Add(new Claim("type", user.UserType));
+                claims.Add(new Claim("verified", user.Verified.ToString()));
                 claims.Add(new Claim(ClaimTypes.Role, user.UserType));
 
-                //Kreiramo kredencijale za potpisivanje tokena. Token mora biti potpisan privatnim kljucem
-                //kako bi se sprecile njegove neovlascene izmene
+                // create token
                 SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey.Value));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var tokeOptions = new JwtSecurityToken(
-                    issuer: "http://localhost:44352",       //url servera koji je izdao token, moj server
-                    claims: claims, //claimovi
-                    expires: DateTime.Now.AddMinutes(30),   // vazenje tokena u minutama - 30
-                    signingCredentials: signinCredentials   // kredencijali za potpis
+                    issuer: "http://localhost:44352",           //url servera koji je izdao token, moj server
+                    claims: claims,                             //claimovi
+                    expires: DateTime.Now.AddMinutes(30),       // vazenje tokena u minutama - 30
+                    signingCredentials: signinCredentials       // kredencijali za potpis
                 );
                 string tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
                 return  new TokenDto() { Token = tokenString };      // success
             }    
             else
-                return new TokenDto() { Token = "-2" };      // wrong password
+                return new TokenDto() { Token = "-2" };             // wrong password
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wjkdamzeRhz7ZEZRV9eDW48tLUdkFhDQn9XEljFK1R0ervkJwBZBkuPtbbl/J8ns+wNB182m7KHJbrFgSwxHtQ==",
+  "dgSpecHash": "xEk0d7USBZzvZESuj8QPfKUHDj/A2hV9FLpdFKYhpvBNq8NZCTkejfQB5aAf5Nzm6BfgBnDPaEVn6oVHrHKj6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\neven\\OneDrive\\Desktop\\Web2_projekat\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
+  "projectFilePath": "C:\\Users\\neven\\OneDrive\\Desktop\\PancakeDeliveryService\\PancakeDeliveryService\\DeliveryService\\DeliveryService\\DeliveryService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\neven\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\neven\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

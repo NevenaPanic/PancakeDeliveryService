@@ -6,6 +6,7 @@ import { Login } from '../models/login.model';
 import { Register } from '../models/register.model';
 import { Token } from '../models/token.model';
 import { Product } from '../models/product.model';
+import { MakeOrder } from '../models/makeOrder.model';
 
 @Injectable({
     providedIn: 'root'
@@ -32,5 +33,10 @@ export class UserService {
     getAllProducts(): Observable<Product[]>
     {
         return this.http.get<Product[]>(environment.serverURL + '/api/users/getAllProducts')
+    }
+
+    makeOrder(order: MakeOrder)
+    {
+        return this.http.post<Object>(environment.serverURL + '/api/users/makeOrder', order);
     }
 }

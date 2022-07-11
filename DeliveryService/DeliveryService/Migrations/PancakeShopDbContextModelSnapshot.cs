@@ -19,6 +19,57 @@ namespace DeliveryService.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DeliveryService.Models.Order", b =>
+                {
+                    b.Property<int>("OrderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DelivererID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DeliveryAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.HasKey("OrderID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("DeliveryService.Models.OrderedProduct", b =>
+                {
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderID", "ProductID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderedProducts");
+                });
+
             modelBuilder.Entity("DeliveryService.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -77,7 +128,7 @@ namespace DeliveryService.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Verified")
+                    b.Property<bool?>("Verified")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -87,6 +138,35 @@ namespace DeliveryService.Migrations
                         .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DeliveryService.Models.OrderedProduct", b =>
+                {
+                    b.HasOne("DeliveryService.Models.Order", "Order")
+                        .WithMany("OrderedProducts")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DeliveryService.Models.Product", "Product")
+                        .WithMany("OrderedProducts")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DeliveryService.Models.Order", b =>
+                {
+                    b.Navigation("OrderedProducts");
+                });
+
+            modelBuilder.Entity("DeliveryService.Models.Product", b =>
+                {
+                    b.Navigation("OrderedProducts");
                 });
 #pragma warning restore 612, 618
         }

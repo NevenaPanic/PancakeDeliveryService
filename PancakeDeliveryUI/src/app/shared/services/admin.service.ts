@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { Order } from "../models/order.model";
 import { Product } from "../models/product.model";
 import { User } from "../models/user.model";
 
@@ -30,5 +31,10 @@ export class AdminService {
     rejectUser(id: number) : Observable<Object>
     {
         return this.http.post<Object>(environment.serverURL + '/api/admins/rejectUser', id);
+    }
+
+    getAllOrders() : Observable<Order[]>
+    {
+        return this.http.get<Order[]>(environment.serverURL + '/api/admins/getAllOrders');
     }
 }

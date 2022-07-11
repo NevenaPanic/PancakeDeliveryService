@@ -13,5 +13,6 @@ namespace DeliveryService.Interfaces
 
         bool RejectUser(int id);
         bool VerifyUser(int id);
+        List<DisplayOrderDto> GetAllOrders();
     }
 }

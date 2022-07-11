@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AdminService } from '../../../shared/services/admin.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product.model';
+import { AdminService } from 'src/app/shared/services/admin.service';
 
 @Component({
   selector: 'app-addProduct',

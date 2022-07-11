@@ -12,6 +12,8 @@ namespace DeliveryService.Models
         public double Price { get; set; }
         public string Ingredients { get; set; }
         public string PictureSource { get; set; }
+        public ICollection<OrderedProduct> OrderedProducts { get; set; }
+
         public Product() { }
     }
 }

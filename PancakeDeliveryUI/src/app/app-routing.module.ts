@@ -3,13 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './access/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddProductdComponent } from './dashboardElemnts/admin/addProduct/addProduct.component';
+import { AllOrdersComponent } from './dashboardElemnts/admin/allOrders/allOrders.component';
 import { VerifyComponent } from './dashboardElemnts/admin/verify/verify.component';
 import { NewCurrentOrderComponent } from './dashboardElemnts/customer/newCurrentOrder/newCurrentOrder.component';
+import { NewOrdersComponent } from './dashboardElemnts/deliverer/newOrders/newOrders.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   // all users
   { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: '*', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
   { path: 'register', component: RegisterComponent},
 
@@ -21,7 +24,12 @@ const routes: Routes = [
 
   // admin
   { path: 'addProduct', component: AddProductdComponent},
-  { path: 'verify', component: VerifyComponent}
+  { path: 'verify', component: VerifyComponent},
+  { path: 'allOrders', component: AllOrdersComponent},
+
+  // deliverer
+  { path: 'newOrders', component: NewOrdersComponent}
+
 ];
 
 @NgModule({

@@ -12,5 +12,6 @@ namespace DeliveryService.Interfaces
         int Register(UserRegisterDto registerDto);
         List<UserDisplayDto> GetAllUsers();
         List<ProductDto> GetAllProducts();
+        int MakeOrder(MakeOrderDto makeOrderDto);
     }
 }

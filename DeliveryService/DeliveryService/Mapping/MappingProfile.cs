@@ -18,6 +18,9 @@ namespace DeliveryService.Mapping
             CreateMap<User, UserRegisterDto>().ReverseMap();
             // product
             CreateMap<Product, ProductDto>().ReverseMap();
+            // Order
+            CreateMap<Order, MakeOrderDto>().ReverseMap();
+            CreateMap<Order, DisplayOrderDto>().ReverseMap();
         }
     }
 }

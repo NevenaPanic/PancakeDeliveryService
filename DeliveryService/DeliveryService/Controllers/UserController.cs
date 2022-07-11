@@ -50,6 +50,12 @@ namespace DeliveryService.Controllers
             return Ok(_userService.GetAllProducts());
         }
 
+        [HttpPost("makeOrder")]     // /api/users/makeOrder
+        public IActionResult MakeOrder([FromBody] MakeOrderDto info) 
+        {
+            return Ok(_userService.MakeOrder(info));
+        }
+
         [HttpPost("uploadImage"), DisableRequestSizeLimit]
         public IActionResult Upload()
         {

@@ -1,6 +1,21 @@
 .upload{
-    font-weight:bold;
-    color:#28a745;
-    margin-left: 15px;
-    line-height: 36px;
-  }
+  font-weight:bold;
+  color:#28a745;
+  margin-left: 15px;
+  line-height: 36px;
+  font-size: 12px;
+}
+
+.row{
+  margin-bottom: 15px;
+}
+
+.col{
+  border: 1px solid #444444;
+   margin-right: 15px;
+}
+
+button{
+  width: 100%;
+}
+

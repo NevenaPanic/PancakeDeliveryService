@@ -112,6 +112,7 @@ namespace DeliveryService
             // registrujem servis
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IDelivererService, DelivererService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

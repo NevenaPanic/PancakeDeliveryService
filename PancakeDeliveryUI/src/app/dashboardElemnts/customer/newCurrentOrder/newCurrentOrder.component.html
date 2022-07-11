@@ -1,9 +1,36 @@
-<div *ngFor="let product of allProducts" class="container">
-    <div class="row" style="height: 150px; padding:15px; border: 3px solid #E9D3FF; border-radius:20px; margin: 10px;">
-        <img [src]="createImgPath(product.pictureSource)" style="width: 110px;height:120px; float: left; border: 3px solid #E9D3FF; border-radius: 5px; padding: 0px;">
-        <p style="text-align: center; width: 75%;">
-            <i>{{product.id}}</i> : <b>{{product.name}}</b> [ <b>{{product.price}} €</b> ]<br><hr>
-            {{product.ingredients}}
-        </p>
+<div id="menu">
+    <h2 class="nameTag"><b> Menu: </b></h2>
+    <hr>
+    <div *ngFor="let product of allProducts">
+        <app-productDisplay [product]="product" (addedProduct)="addItemToOrder($event)"></app-productDisplay>
     </div>
+    <hr>
+</div>
+<div id="orderWindow">
+    <form [formGroup]="makeOrderForm" (ngSubmit)="makeOrder()">
+        <div class="formInputs">
+            <h2 class="nameTag"> New order: </h2>
+            <hr>
+            <label> Delivery address: </label>
+            <br>
+            <input type="text" formControlName="deliveryAddress" class="formControl">
+            <br>
+            <label> Comment: </label>
+            <br>
+            <textarea formControlName="comment" class="formControl"></textarea>
+            <br>
+            <label> Order products: </label>
+            <br>
+            <textarea readonly="true" id="productsTextarea">{{order}}
+            </textarea>
+            <br>
+            <label>
+                 + Delivery fee 5 &euro;
+                <br> Total: <i id="price">{{total}}</i> &euro;
+            </label>
+            <hr>
+            <input name="make" type="submit" class="btn btn-dark" value="Make Order">
+            <button name="clear" class="btn btn-dark" (click)="clearOrder()"> Clear Order </button>
+        </div>
+    </form>
 </div>

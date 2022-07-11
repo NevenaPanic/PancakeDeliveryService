@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit{
     // dodam ovo
     userType: string = '';
     username: string = '';
+    status: string = '';
 
     ngOnInit(): void {
         let token = localStorage.getItem('token');
@@ -20,10 +21,24 @@ export class DashboardComponent implements OnInit{
             let decodedToken = JSON.parse(atob(token.split('.')[1]));
             this.userType = decodedToken.type;
             this.username = decodedToken.username;
+
+            // status 'bar'
+            if(decodedToken.verified === 'True')
+            {
+                this.status = "Verified! :D";
+            }
+            else if(decodedToken.verified === 'False')
+            {
+                this.status = "Rejected! :(";
+            }
+            else
+            {
+                this.status = "Pending request! :)";
+            }
         }
     }
 
     // dodam konstruktor sa dep. in.
-    constructor(private service: UserService, private snackBar: MatSnackBar, private router: Router) {
+    constructor(private snackBar: MatSnackBar, private router: Router) {
     }
 }
